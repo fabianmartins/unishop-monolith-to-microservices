@@ -252,6 +252,24 @@
 				}]
 			}
 		},
+		"LambdaPolicy": {
+			"Type": "AWS::IAM::Policy",
+			"Properties": {
+				"PolicyName": "DynamoDBPermissions",
+				"PolicyDocument": {
+					"Statement": [{
+						"Effect": "Allow",
+						"Action": [
+							"dynamodb:*"
+						],
+						"Resource": "*"
+					}]
+				},
+				"Roles": [{
+					"Ref": "S3Role"
+				}]
+			}
+		},
 		"S3Role": {
 			"Type": "AWS::IAM::Role",
 			"Properties": {
@@ -260,7 +278,7 @@
 					"Statement": [{
 						"Effect": "Allow",
 						"Principal": {
-							"Service": ["ec2.amazonaws.com"]
+							"Service": ["ec2.amazonaws.com", "lambda.amazonaws.com" ]
 						},
 						"Action": [
 							"sts:AssumeRole"
